@@ -4,6 +4,7 @@
 ```
 npm i
 npm i --save-dev web-vitals
+npm i @yamada-ui/react
 ```
 
 ## 実行
