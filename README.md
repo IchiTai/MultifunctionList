@@ -5,6 +5,9 @@
 npm i
 npm i --save-dev web-vitals
 npm i @yamada-ui/react
+npm install uuid
+npm i --save-dev @types/uuid
+
 ```
 
 ## 実行

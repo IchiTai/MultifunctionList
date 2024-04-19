@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Text, Box, Button, ButtonGroup, Flex, Input } from "@yamada-ui/react";
 import { Listbox } from './Listbox';
+import { v4 as uuidv4 } from 'uuid';
 
 type Tab = {
-  id: number;
+  id: string;
   label: string;
 }
 
@@ -12,20 +13,20 @@ export const TabContainer = () => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const [newTabName, setNewTabName] = useState<string>("");
 
-  const handleTabClick = (tabId: number) => {
+  const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
   }
   const handleAddTab = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTabId = `tab${tabs.length + 1}`;
-    const newTabLabel = newTabName.trim() !== "" ? newTabName : `Tab ${tabs.length + 1}`;
+    const newTabId = uuidv4();
+    const newTabLabel = newTabName.trim() !== "" ? newTabName : `Tab`;
     const newTab: Tab = { id: newTabId, label: newTabLabel };
     setTabs([...tabs, newTab]);
     setActiveTab(newTabId);
     setNewTabName("");
   }
 
-  const handleTabDelete=(tabId: number) =>{
+  const handleTabDelete=(tabId: string) =>{
     const newTabs = tabs.filter((tab) => tab.id !== tabId);
 
     setTabs(newTabs);
@@ -67,13 +68,12 @@ export const TabContainer = () => {
               </Button>
             </ButtonGroup>
           ))}
-
         </ButtonGroup>
       </Box>
       <Box mt={4}>
         {tabs.map((tab) => (
           <Box key={tab.id} display={activeTab === tab.id ? 'block' : 'none'}>
-            <Listbox message={`Contents of ${tab.label}`} />
+            <Listbox message={`${tab.label}`} />
           </Box>
         ))}
       </Box>
