@@ -3,7 +3,7 @@ import { Text, Box, Button, ButtonGroup, Flex, Input } from "@yamada-ui/react";
 import { Listbox } from './Listbox';
 
 type Tab = {
-  id: string;
+  id: number;
   label: string;
 }
 
@@ -12,7 +12,7 @@ export const TabContainer = () => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const [newTabName, setNewTabName] = useState<string>("");
 
-  const handleTabClick = (tabId: string) => {
+  const handleTabClick = (tabId: number) => {
     setActiveTab(tabId);
   }
   const handleAddTab = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +23,12 @@ export const TabContainer = () => {
     setTabs([...tabs, newTab]);
     setActiveTab(newTabId);
     setNewTabName("");
+  }
+
+  const handleTabDelete=(tabId: number) =>{
+    const newTabs = tabs.filter((tab) => tab.id !== tabId);
+
+    setTabs(newTabs);
   }
 
   return (
@@ -45,16 +51,23 @@ export const TabContainer = () => {
         <Text p={4} fontSize='2xl'>Tab of List</Text>
         <ButtonGroup p={4} gap={4}>
           {tabs.map((tab) => (
-            <Button
-              _hover={{ bg: 'primary.200', color: 'black', }}
-              key={tab.id}
-              onClick={() => handleTabClick(tab.id)}
-              color={activeTab === tab.id ? 'white' : 'black'}
-              bgColor={activeTab === tab.id ? 'primary' : 'white'}
-            >
-              {tab.label}
-            </Button>
+            <ButtonGroup isAttached>
+              <Button
+                _hover={{ bg: 'primary.200', color: 'black', }}
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id)}
+                color={activeTab === tab.id ? 'white' : 'black'}
+                bgColor={activeTab === tab.id ? 'primary' : 'white'}
+              >
+                {tab.label}
+              </Button>
+
+              <Button colorScheme='red' onClick={() => handleTabDelete(tab.id)}>
+                ×
+              </Button>
+            </ButtonGroup>
           ))}
+
         </ButtonGroup>
       </Box>
       <Box mt={4}>
