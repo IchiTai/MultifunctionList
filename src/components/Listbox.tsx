@@ -79,7 +79,7 @@ export const Listbox = ({ message }) => {
 
       <Stack>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <Flex>
+          <Flex gap={4}>
             <Input
               type='text'
               bgColor='white'
@@ -88,7 +88,6 @@ export const Listbox = ({ message }) => {
               value={inputValue}
               onChange={(e) => handleChange(e)}>
             </Input>
-
             <Button textColor='white' colorScheme='primary' type='submit'>
               Add
             </Button>

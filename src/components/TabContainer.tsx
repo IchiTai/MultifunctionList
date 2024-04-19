@@ -15,7 +15,8 @@ export const TabContainer = () => {
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
   }
-  const handleAddTab = () => {
+  const handleAddTab = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const newTabId = `tab${tabs.length + 1}`;
     const newTabLabel = newTabName.trim() !== "" ? newTabName : `Tab ${tabs.length + 1}`;
     const newTab: Tab = { id: newTabId, label: newTabLabel };
@@ -26,17 +27,20 @@ export const TabContainer = () => {
 
   return (
     <Box bg='gray.300' p={6}>
-      <Flex>
-        <Input
-          placeholder="New List Name"
-          value={newTabName}
-          onChange={(e) => setNewTabName(e.target.value)}
-          mr={2}
-          bgColor='white'
-          focusBorderColor='primary.300'
-        />
-        <Button colorScheme='primary' onClick={handleAddTab}>Add List</Button>
-      </Flex>
+
+      <form onSubmit={(e) => handleAddTab(e)}>
+        <Flex gap={4}>
+          <Input
+            placeholder="New List Name"
+            value={newTabName}
+            onChange={(e) => setNewTabName(e.target.value)}
+            bgColor='white'
+            focusBorderColor='primary.300'
+          />
+          <Button colorScheme='primary' type='submit'>Add List</Button>
+        </Flex>
+      </form>
+
       <Box bg='gray.100' mt={4} rounded='md' overflow="auto">
         <Text p={4} fontSize='2xl'>Tab of List</Text>
         <ButtonGroup p={4} gap={4}>
