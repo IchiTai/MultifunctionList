@@ -20,6 +20,7 @@ const customTheme=extendTheme({
     warning: "orange.500",
     danger: "red.500",
     link: "blue.500",
+    blank: "whiteAlpha",
   },
   colorSchemes: {
     primary: "blue",
