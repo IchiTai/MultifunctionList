@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { Text, Box, Button, ButtonGroup, Flex, Input, Menu, MenuButton, MenuItem, MenuList } from "@yamada-ui/react";
+import {
+  Text,
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  HStack,
+  Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList
+} from "@yamada-ui/react";
 import { Listbox } from './Listbox';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -70,7 +82,6 @@ export const TabContainer = () => {
             value={newTabName}
             onChange={(e) => setNewTabName(e.target.value)}
             bgColor='white'
-            focusBorderColor='primary.300'
           />
           <Button colorScheme='primary' type='submit'>Add List</Button>
         </Flex>
@@ -82,7 +93,7 @@ export const TabContainer = () => {
           {tabs.map((tab) => (
             <ButtonGroup isAttached key={tab.id}>
               {editTabId === tab.id ? (
-                <>
+                <form onSubmit={() => handleSaveEditTab(tab.id)}>
                   <Input
                     value={editedTabName}
                     onChange={(e) => setEditedTabName(e.target.value)}
@@ -91,7 +102,7 @@ export const TabContainer = () => {
                   />
                   <Button colorScheme="green" onClick={() => handleSaveEditTab(tab.id)}>Save</Button>
                   <Button colorScheme="red" onClick={handleCancelEditTab}>Cancel</Button>
-                </>
+                </form>
               ) : (
                 <>
                   <Flex key={tab.id}>
@@ -104,9 +115,9 @@ export const TabContainer = () => {
                       {tab.label}
                     </Button>
                     <Menu>
-                      <MenuButton 
-                      as={Button} 
-                      bg="white" 
+                      <MenuButton
+                        as={Button}
+                        bg="white"
                       >
                         ...
                       </MenuButton>

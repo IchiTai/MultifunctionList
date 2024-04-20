@@ -83,7 +83,6 @@ export const Listbox = ({ message }) => {
             <Input
               type='text'
               bgColor='white'
-              focusBorderColor='primary.300'
               placeholder='Item'
               value={inputValue}
               onChange={(e) => handleChange(e)}>
@@ -102,7 +101,6 @@ export const Listbox = ({ message }) => {
                     <Input
                       type='text'
                       bgColor='white'
-                      focusBorderColor='primary.300'
                       onChange={(e) => handleEdit(item.id, e.target.value)}
                       value={item.inputValue}
                       disabled={item.checked}
