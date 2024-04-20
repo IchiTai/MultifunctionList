@@ -4,7 +4,7 @@ import { TabContainer } from './components/TabContainer';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div>
       <Title />
       <TabContainer />
     </div>

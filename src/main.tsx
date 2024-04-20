@@ -30,6 +30,9 @@ const customTheme=extendTheme({
     warning: "orange",
     danger: "red",
     link: "blue",
+    custums: {
+      blank: "white"
+    }
   },
 })()
 
