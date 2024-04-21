@@ -136,7 +136,7 @@ export const TabContainer = () => {
       <Box mt={4}>
         {tabs.map((tab) => (
           <Box key={tab.id} display={activeTab === tab.id ? 'block' : 'none'}>
-            <Listbox message={`Contents of ${tab.label}`} />
+            <Listbox message={tab.label} />
           </Box>
         ))}
       </Box>

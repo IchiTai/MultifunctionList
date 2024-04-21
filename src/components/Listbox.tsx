@@ -13,16 +13,19 @@ import {
   Input,
   ListItem,
   DiscList,
+  NumberInput,
 } from "@yamada-ui/react"
 
 export const Listbox = ({ message }) => {
   const [inputValue, setInputValue] = useState("");
+  const [inputNumber, setInputNumber] = useState<number>(0);
   const [items, setItems] = useState<Item[]>([]);
 
   type Item = {
     inputValue: string;
     id: number;
     checked: boolean;
+    inputNumber: number;
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,16 +40,29 @@ export const Listbox = ({ message }) => {
       inputValue: inputValue,
       id: items.length,
       checked: false,
+      inputNumber: inputNumber,
     };
 
     setItems([newItem, ...items]);
     setInputValue("");
+    setInputNumber(0);
   }
 
   const handleEdit = (id: number, inputValue: string) => {
     const newItems = items.map((item) => {
       if (item.id === id) {
         item.inputValue = inputValue;
+      }
+      return item;
+    });
+
+    setItems(newItems);
+  }
+
+  const handleNum = (id: number, inputNumber: number) => {
+    const newItems = items.map((item) => {
+      if (item.id === id) {
+        item.inputNumber = inputNumber;
       }
       return item;
     });
@@ -104,6 +120,11 @@ export const Listbox = ({ message }) => {
                       onChange={(e) => handleEdit(item.id, e.target.value)}
                       value={item.inputValue}
                       disabled={item.checked}
+                    />
+                    <NumberInput
+                      bgColor='white'
+                      min={0}
+                      onChange={(value) => handleNum(item.id, parseInt(value))}
                     />
                     <Checkbox
                       bgColor='white'
